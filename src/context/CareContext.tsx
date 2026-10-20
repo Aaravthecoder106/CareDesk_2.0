@@ -6,6 +6,20 @@ import { INITIAL_AUDIT_LOGS, INITIAL_ELDERS, INITIAL_REPORTS, INITIAL_VITALS } f
 import { parseAndEvaluateVitals, VitalsInputRaw } from '@/lib/vitalsEngine';
 import { isLiveSupabaseConfigured } from '@/lib/supabase/client';
 
+export type UserRole = 'caregiver' | 'patient';
+
+export interface UserProfile {
+  name: string;
+  role: UserRole;
+  phone?: string;
+  language?: string;
+  elderName?: string;
+  relationship?: string;
+  checkInMethod?: string;
+  emergencyPhone?: string;
+  createdAt: string;
+}
+
 interface CareContextType {
   elders: Elder[];
   activeElderId: string;
@@ -19,6 +33,9 @@ interface CareContextType {
   activeElderAuditLogs: AuditLogItem[];
   addVitalReading: (raw: VitalsInputRaw, recordedByName?: string) => { success: boolean; result?: VitalsParseResult; error?: string };
   addReport: (report: MedicalReport) => void;
+  currentUser: UserProfile | null;
+  registerUser: (profile: Omit<UserProfile, 'createdAt'>) => void;
+  logoutUser: () => void;
   isLiveMode: boolean;
   resetToMockData: () => void;
 }
@@ -32,6 +49,7 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
   const [vitals, setVitals] = useState<VitalReading[]>(INITIAL_VITALS);
   const [reports, setReports] = useState<MedicalReport[]>(INITIAL_REPORTS);
   const [auditLogs, setAuditLogs] = useState<AuditLogItem[]>(INITIAL_AUDIT_LOGS);
+  const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [isLiveMode, setIsLiveMode] = useState<boolean>(false);
 
   // Load from LocalStorage if available
@@ -43,12 +61,14 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
       const storedReports = localStorage.getItem('caredesk_reports');
       const storedLogs = localStorage.getItem('caredesk_audit');
       const storedActive = localStorage.getItem('caredesk_active_elder');
+      const storedUser = localStorage.getItem('caredesk_user');
 
       if (storedElders) setElders(JSON.parse(storedElders));
       if (storedVitals) setVitals(JSON.parse(storedVitals));
       if (storedReports) setReports(JSON.parse(storedReports));
       if (storedLogs) setAuditLogs(JSON.parse(storedLogs));
       if (storedActive) setActiveElderId(storedActive);
+      if (storedUser) setCurrentUser(JSON.parse(storedUser));
     } catch (e) {
       console.warn('Failed to load stored CareDesk data, using defaults', e);
     } finally {
@@ -150,17 +170,53 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
     setAuditLogs((prev) => [newLog, ...prev]);
   };
 
+  const registerUser = (profileData: Omit<UserProfile, 'createdAt'>) => {
+    const profile: UserProfile = {
+      ...profileData,
+      createdAt: new Date().toISOString(),
+    };
+    setCurrentUser(profile);
+    try {
+      localStorage.setItem('caredesk_user', JSON.stringify(profile));
+    } catch (e) {
+      console.error(e);
+    }
+
+    // Add audit log for signup
+    const newLog: AuditLogItem = {
+      id: `a-${Date.now()}`,
+      elderId: activeElderId,
+      actorName: profile.name,
+      actionType: 'consent_granted',
+      description: `New CareDesk signup: ${profile.name} registered as a ${profile.role.toUpperCase()} (${profile.relationship || 'Self'}).`,
+      timestamp: new Date().toISOString(),
+      metadata: { role: profile.role, language: profile.language },
+    };
+    setAuditLogs((prev) => [newLog, ...prev]);
+  };
+
+  const logoutUser = () => {
+    setCurrentUser(null);
+    try {
+      localStorage.removeItem('caredesk_user');
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
   const resetToMockData = () => {
     localStorage.removeItem('caredesk_elders');
     localStorage.removeItem('caredesk_vitals');
     localStorage.removeItem('caredesk_reports');
     localStorage.removeItem('caredesk_audit');
     localStorage.removeItem('caredesk_active_elder');
+    localStorage.removeItem('caredesk_user');
     setElders(INITIAL_ELDERS);
     setActiveElderId(INITIAL_ELDERS[0].id);
     setVitals(INITIAL_VITALS);
     setReports(INITIAL_REPORTS);
     setAuditLogs(INITIAL_AUDIT_LOGS);
+    setCurrentUser(null);
   };
 
   return (
@@ -178,6 +234,9 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
         activeElderAuditLogs,
         addVitalReading,
         addReport,
+        currentUser,
+        registerUser,
+        logoutUser,
         isLiveMode,
         resetToMockData,
       }}

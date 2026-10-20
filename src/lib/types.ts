@@ -70,7 +70,7 @@ export interface AuditLogItem {
   id: string;
   elderId: string;
   actorName: string;
-  actionType: 'vitals_logged' | 'report_analyzed' | 'elder_updated' | 'alert_triggered';
+  actionType: 'vitals_logged' | 'report_analyzed' | 'elder_updated' | 'alert_triggered' | 'user_registered' | 'consent_granted';
   description: string;
   timestamp: string;
   metadata?: Record<string, unknown>;

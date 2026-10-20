@@ -30,7 +30,7 @@ export function Navbar({ onOpenCheckIn }: NavbarProps) {
   const [isEmergencyOpen, setIsEmergencyOpen] = useState(false);
 
   const navLinks = [
-    { label: 'Dashboard', href: '/', icon: LayoutDashboard },
+    { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Daily Vitals', href: '/vitals', icon: Activity },
     { label: 'AI Report Analyzer', href: '/reports', icon: Sparkles },
     { label: 'Audit Trail', href: '/audit', icon: History },
