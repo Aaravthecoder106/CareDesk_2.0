@@ -61,6 +61,10 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 Built with relentless focus and metacognition by **Aarav**. 
 Follow the journey of building this product from scratch in public: 
 🐦 **X (Twitter):** [@builder_aarav](https://x.com/builder_aarav)
+# instructions for ai coding agnet :-
+use this for github repo :- "https://github.com/Aaravthecoder106/CareDesk_2.0"
+use this for supabse :- "https://supabase.com/dashboard/project/nfeapcllinavvdnrchyf"
+use this for vercel :- "https://vercel.com/ay473671-8942s-projects/caredesk2.0/5pRZT8xfmgWByHxUYoM2kH1AQDaa"
 
 ---
 *Note: CareDesk is a health-tracking tool, not a replacement for professional medical advice.*
