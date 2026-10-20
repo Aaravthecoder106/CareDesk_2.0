@@ -38,13 +38,13 @@ export function LandingTestimonials() {
     <section className="py-20 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         <div className="text-center max-w-2xl mx-auto space-y-4">
-          <span className="text-xs font-bold uppercase tracking-wider text-rose-600 dark:text-rose-400 bg-rose-50 dark:bg-rose-950/60 px-3 py-1 rounded-full border border-rose-200/50">
+          <span className="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-50 px-3 py-1 rounded-full border border-rose-200">
             Real Family Stories
           </span>
-          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
             Built for Real Indian Families
           </h2>
-          <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+          <p className="text-sm sm:text-base text-slate-600 font-medium">
             Hear from adult children and elderly parents who replaced anxious daily phone calls with quiet confidence.
           </p>
         </div>
@@ -53,7 +53,7 @@ export function LandingTestimonials() {
           {testimonials.map((t, i) => (
             <div
               key={i}
-              className={`rounded-3xl liquid-glass-card p-7 space-y-5 flex flex-col justify-between border ${t.accent}`}
+              className={`rounded-3xl liquid-glass-card p-7 space-y-5 flex flex-col justify-between border bg-white ${t.accent}`}
             >
               <div className="space-y-4">
                 <div className="flex items-center gap-1 text-amber-500">
@@ -61,21 +61,21 @@ export function LandingTestimonials() {
                     <Star key={idx} className="w-4 h-4 fill-amber-400" />
                   ))}
                 </div>
-                <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic">
+                <p className="text-xs sm:text-sm text-slate-700 font-medium leading-relaxed italic">
                   &ldquo;{t.quote}&rdquo;
                 </p>
               </div>
 
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-100 dark:border-slate-800">
+              <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
                 <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center font-bold text-white text-xs shadow-md">
                   {t.avatar}
                 </div>
                 <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                  <h4 className="text-xs font-bold text-slate-900">
                     {t.name}
                   </h4>
-                  <p className="text-[11px] text-slate-500">{t.role}</p>
-                  <p className="text-[10px] text-blue-600 dark:text-blue-400 font-semibold">
+                  <p className="text-[11px] text-slate-600 font-medium">{t.role}</p>
+                  <p className="text-[10px] text-blue-700 font-bold">
                     {t.parentInfo}
                   </p>
                 </div>

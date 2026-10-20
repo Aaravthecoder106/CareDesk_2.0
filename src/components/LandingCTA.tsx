@@ -24,11 +24,11 @@ export function LandingCTA({ onOpenSignup }: LandingCTAProps) {
               <span>Zero-Risk Setup • Free for Families</span>
             </span>
 
-            <h2 className="text-3xl sm:text-5xl font-black tracking-tight text-white leading-tight antigravity-text-glow font-sans">
+            <h2 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight drop-shadow-sm font-sans">
               Start Monitoring Your Parents With Total Confidence Today
             </h2>
 
-            <p className="text-sm sm:text-base text-blue-100 max-w-xl mx-auto leading-relaxed">
+            <p className="text-sm sm:text-base text-white/95 max-w-xl mx-auto leading-relaxed font-medium">
               Join thousands of families turning anxious phone calls into effortless daily health telemetry. Choose your path below:
             </p>
           </div>

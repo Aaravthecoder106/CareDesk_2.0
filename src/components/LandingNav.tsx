@@ -14,7 +14,7 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
   const { currentUser } = useCare();
 
   return (
-    <header className="sticky top-0 z-40 w-full liquid-glass border-b border-white/60 dark:border-slate-800/80 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-xl border-b border-slate-200 shadow-xs">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex h-20 items-center justify-between gap-4">
           {/* Brand Logo */}
@@ -24,33 +24,33 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
             </div>
             <div>
               <div className="flex items-center gap-1.5">
-                <span className="text-xl font-black tracking-tight text-slate-900 dark:text-white">
+                <span className="text-xl font-black tracking-tight text-slate-900">
                   CareDesk
                 </span>
-                <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-md bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-300">
+                <span className="text-[10px] font-black px-1.5 py-0.5 rounded-md bg-blue-100 text-blue-800">
                   2.0
                 </span>
               </div>
-              <p className="text-[10px] text-slate-500 font-medium hidden sm:block">
+              <p className="text-[10px] text-slate-500 font-semibold hidden sm:block">
                 Remote Elder-Care, Simplified
               </p>
             </div>
           </Link>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600 dark:text-slate-300">
-            <a href="#roles" className="hover:text-blue-600 dark:hover:text-white transition">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-bold text-slate-700">
+            <a href="#roles" className="hover:text-blue-600 transition">
               Patient vs Caregiver
             </a>
-            <a href="#features" className="hover:text-blue-600 dark:hover:text-white transition">
+            <a href="#features" className="hover:text-blue-600 transition">
               Clinical Features
             </a>
-            <a href="#security" className="hover:text-blue-600 dark:hover:text-white transition">
-              Audit & Privacy
+            <a href="#security" className="hover:text-blue-600 transition">
+              Audit &amp; Privacy
             </a>
             <Link
               href="/dashboard"
-              className="flex items-center gap-1.5 text-blue-600 dark:text-blue-400 font-semibold hover:underline"
+              className="flex items-center gap-1.5 text-blue-700 font-extrabold hover:text-blue-800 hover:underline"
             >
               <Play className="w-3.5 h-3.5 fill-current" />
               <span>Interactive Demo</span>
@@ -62,7 +62,7 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
             {currentUser ? (
               <Link
                 href="/dashboard"
-                className="px-4 py-2 rounded-xl bg-blue-50 dark:bg-blue-950/50 text-blue-700 dark:text-blue-300 border border-blue-200/60 text-xs font-bold hover:bg-blue-100 transition"
+                className="px-4 py-2 rounded-xl bg-blue-50 text-blue-800 border border-blue-200 text-xs font-bold hover:bg-blue-100 transition"
               >
                 Go to Dashboard ({currentUser.name})
               </Link>
@@ -70,13 +70,13 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
               <>
                 <button
                   onClick={() => onOpenSignup('patient')}
-                  className="px-3.5 py-2 text-xs font-bold text-teal-700 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 transition"
+                  className="px-3.5 py-2 text-xs font-extrabold text-teal-800 hover:text-teal-950 transition"
                 >
                   Elder Portal
                 </button>
                 <button
                   onClick={() => onOpenSignup('caregiver')}
-                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition hover:scale-102"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition hover:scale-102"
                 >
                   <span>Sign Up Free</span>
                   <ArrowRight className="w-3.5 h-3.5" />

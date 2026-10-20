@@ -6,7 +6,7 @@ import { Heart, ShieldAlert, ArrowRight } from 'lucide-react';
 
 export function LandingFooter() {
   return (
-    <footer className="border-t border-slate-200/60 dark:border-slate-800 bg-white/70 dark:bg-slate-950/70 py-12 liquid-glass">
+    <footer className="border-t border-slate-200 bg-white py-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2 max-w-sm">
@@ -14,21 +14,21 @@ export function LandingFooter() {
               <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-sm">
                 <Heart className="w-4 h-4 fill-white" />
               </div>
-              <span className="text-lg font-black tracking-tight text-slate-900 dark:text-white">
+              <span className="text-lg font-black tracking-tight text-slate-900">
                 CareDesk 2.0
               </span>
             </div>
-            <p className="text-xs text-slate-500 leading-relaxed">
+            <p className="text-xs text-slate-600 font-medium leading-relaxed">
               Zero-friction remote elder-care telemetry dashboard built for families, aging parents, and geriatric care coordinators.
             </p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs text-slate-600 dark:text-slate-400">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-8 text-xs text-slate-600">
             <div className="space-y-2">
-              <p className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">
+              <p className="font-extrabold text-slate-900 uppercase tracking-wider text-[10px]">
                 Platform
               </p>
-              <ul className="space-y-1.5">
+              <ul className="space-y-1.5 font-medium">
                 <li>
                   <Link href="/dashboard" className="hover:text-blue-600 transition">
                     Care Dashboard
@@ -53,10 +53,10 @@ export function LandingFooter() {
             </div>
 
             <div className="space-y-2">
-              <p className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">
+              <p className="font-extrabold text-slate-900 uppercase tracking-wider text-[10px]">
                 Personas
               </p>
-              <ul className="space-y-1.5">
+              <ul className="space-y-1.5 font-medium">
                 <li>
                   <a href="#roles" className="hover:text-blue-600 transition">
                     For Family Caregivers
@@ -81,10 +81,10 @@ export function LandingFooter() {
             </div>
 
             <div className="space-y-2 sm:col-span-1 col-span-2">
-              <p className="font-bold text-slate-900 dark:text-white uppercase tracking-wider text-[10px]">
+              <p className="font-extrabold text-slate-900 uppercase tracking-wider text-[10px]">
                 Open Source &amp; Creator
               </p>
-              <ul className="space-y-1.5">
+              <ul className="space-y-1.5 font-medium">
                 <li>
                   <a
                     href="https://github.com/Aaravthecoder106/CareDesk_2.0"
@@ -110,9 +110,9 @@ export function LandingFooter() {
           </div>
         </div>
 
-        <div className="pt-6 border-t border-slate-200/60 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-500">
+        <div className="pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-slate-600 font-medium">
           <p>© 2026 CareDesk 💙 — Built with relentless focus by Aarav.</p>
-          <div className="flex items-center gap-2 text-slate-400">
+          <div className="flex items-center gap-2 text-slate-500">
             <ShieldAlert className="w-3.5 h-3.5 text-amber-500" />
             <span>CareDesk is a family health tracking system, not an emergency ambulance service.</span>
           </div>

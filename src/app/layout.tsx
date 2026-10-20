@@ -30,7 +30,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${outfit.variable} ${plusJakarta.variable} h-full antialiased`}>
-      <body className="min-h-full flex flex-col font-sans selection:bg-blue-500 selection:text-white bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100">
+      <body className="min-h-full flex flex-col font-sans selection:bg-blue-500 selection:text-white bg-slate-50 text-slate-900">
         <CareProvider>{children}</CareProvider>
       </body>
     </html>

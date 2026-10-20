@@ -68,21 +68,21 @@ export function MotionTelemetryPreview() {
       {/* Main Glass Telemetry Card */}
       <div className="relative rounded-3xl liquid-glass-card p-6 sm:p-7 space-y-6 overflow-hidden">
         {/* Iridescent Top Rim */}
-        <div className="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 pb-4">
+        <div className="flex items-center justify-between border-b border-slate-200 pb-4">
           <div className="flex items-center gap-2.5">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-blue-500/20">
               <Heart className="w-4 h-4 fill-white" />
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <span className="text-sm font-bold text-slate-900 dark:text-white">
+                <span className="text-sm font-black text-slate-900">
                   Ramesh Sharma
                 </span>
-                <span className="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+                <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
                   68 yrs
                 </span>
               </div>
-              <p className="text-[11px] text-slate-500 flex items-center gap-1">
+              <p className="text-[11px] text-slate-500 flex items-center gap-1 font-medium">
                 <Clock className="w-3 h-3" />
                 <span>Live Telemetry Corridor</span>
               </p>
@@ -90,13 +90,13 @@ export function MotionTelemetryPreview() {
           </div>
 
           {/* Interactive Traffic Light Pill Toggle */}
-          <div className="flex items-center gap-1.5 bg-slate-100/90 dark:bg-slate-800/90 p-1 rounded-2xl border border-slate-200/60 dark:border-slate-700/60 text-xs">
+          <div className="flex items-center gap-1.5 bg-slate-100 p-1 rounded-2xl border border-slate-200 text-xs">
             <button
               onClick={() => setSelectedStatus('green')}
               className={`px-2.5 py-1 rounded-xl font-bold transition flex items-center gap-1 text-[11px] ${
                 selectedStatus === 'green'
-                  ? 'bg-emerald-500 text-white shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-emerald-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-300" />
@@ -107,7 +107,7 @@ export function MotionTelemetryPreview() {
               className={`px-2.5 py-1 rounded-xl font-bold transition flex items-center gap-1 text-[11px] ${
                 selectedStatus === 'yellow'
                   ? 'bg-amber-500 text-white shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-amber-300" />
@@ -117,8 +117,8 @@ export function MotionTelemetryPreview() {
               onClick={() => setSelectedStatus('red')}
               className={`px-2.5 py-1 rounded-xl font-bold transition flex items-center gap-1 text-[11px] ${
                 selectedStatus === 'red'
-                  ? 'bg-rose-500 text-white shadow-sm'
-                  : 'text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  ? 'bg-rose-600 text-white shadow-sm'
+                  : 'text-slate-600 hover:text-slate-900'
               }`}
             >
               <span className="w-2 h-2 rounded-full bg-rose-300" />
@@ -172,48 +172,48 @@ export function MotionTelemetryPreview() {
 
         {/* Real-time Physiological Vitals Grid */}
         <div className="grid grid-cols-3 gap-2.5">
-          <div className="p-3 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-xs">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 shadow-xs">
+            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
               Blood Pressure
             </span>
-            <span className="text-base sm:text-lg font-black font-mono text-slate-900 dark:text-white mt-0.5 block">
+            <span className="text-base sm:text-lg font-black font-mono text-slate-900 mt-0.5 block">
               {current.bp}
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-xs">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 shadow-xs">
+            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
               Fasting Sugar
             </span>
-            <span className="text-base sm:text-lg font-black font-mono text-slate-900 dark:text-white mt-0.5 block">
+            <span className="text-base sm:text-lg font-black font-mono text-slate-900 mt-0.5 block">
               {current.sugar}
             </span>
           </div>
-          <div className="p-3 rounded-2xl bg-white/70 dark:bg-slate-800/60 border border-slate-200/70 dark:border-slate-700/60 shadow-xs">
-            <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+          <div className="p-3 rounded-2xl bg-slate-50 border border-slate-200 shadow-xs">
+            <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
               Blood Oxygen
             </span>
-            <span className="text-base sm:text-lg font-black font-mono text-slate-900 dark:text-white mt-0.5 block">
+            <span className="text-base sm:text-lg font-black font-mono text-slate-900 mt-0.5 block">
               98% SpO2
             </span>
           </div>
         </div>
 
         {/* Bilingual AI Intelligence Explanation Module */}
-        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50/50 dark:from-slate-800/50 dark:to-blue-950/20 border border-slate-200/70 dark:border-slate-700/60 space-y-2.5">
+        <div className="p-4 rounded-2xl bg-gradient-to-r from-slate-50 to-blue-50/70 border border-slate-200 space-y-2.5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-800 dark:text-slate-200">
+            <div className="flex items-center gap-1.5 text-xs font-bold text-slate-900">
               <Sparkles className="w-3.5 h-3.5 text-blue-600" />
               <span>Instant Bilingual Triage Translation</span>
             </div>
 
             {/* Language Switcher */}
-            <div className="flex items-center bg-white dark:bg-slate-800 p-0.5 rounded-lg border border-slate-200 dark:border-slate-700 text-[10px] font-bold">
+            <div className="flex items-center bg-white p-0.5 rounded-lg border border-slate-200 text-[10px] font-bold">
               <button
                 onClick={() => setLanguage('hinglish')}
                 className={`px-2 py-0.5 rounded transition ${
                   language === 'hinglish'
                     ? 'bg-amber-500 text-white shadow-xs'
-                    : 'text-slate-500'
+                    : 'text-slate-600'
                 }`}
               >
                 🇮🇳 Hinglish
@@ -223,7 +223,7 @@ export function MotionTelemetryPreview() {
                 className={`px-2 py-0.5 rounded transition ${
                   language === 'english'
                     ? 'bg-blue-600 text-white shadow-xs'
-                    : 'text-slate-500'
+                    : 'text-slate-600'
                 }`}
               >
                 🇬🇧 English
@@ -231,13 +231,13 @@ export function MotionTelemetryPreview() {
             </div>
           </div>
 
-          <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
+          <p className="text-xs text-slate-700 leading-relaxed font-sans font-medium">
             {language === 'hinglish' ? current.summaryHinglish : current.summaryEnglish}
           </p>
 
-          <div className="flex items-center justify-between pt-1 border-t border-slate-200/50 dark:border-slate-700/50 text-[11px]">
-            <span className="text-slate-500">{current.actionText}</span>
-            <span className={`font-bold capitalize ${current.colorClass}`}>
+          <div className="flex items-center justify-between pt-1 border-t border-slate-200 text-[11px]">
+            <span className="text-slate-600 font-medium">{current.actionText}</span>
+            <span className={`font-extrabold capitalize ${current.colorClass}`}>
               ● Status: {selectedStatus}
             </span>
           </div>

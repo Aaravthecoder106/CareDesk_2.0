@@ -14,71 +14,71 @@ export function LandingSecurity() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             {/* Left 7 cols: Pitch */}
             <div className="lg:col-span-7 space-y-6">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-emerald-100/70 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 border border-emerald-200/60">
+              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-bold bg-emerald-100 text-emerald-900 border border-emerald-200">
                 <ShieldCheck className="w-3.5 h-3.5" />
                 <span>Security &amp; Consent by Design</span>
               </div>
 
-              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white tracking-tight">
+              <h2 className="text-3xl sm:text-4xl font-black text-slate-900 tracking-tight">
                 Health Data Belongs Exclusively to the Family
               </h2>
 
-              <p className="text-sm sm:text-base text-slate-600 dark:text-slate-300 leading-relaxed">
+              <p className="text-sm sm:text-base text-slate-600 font-medium leading-relaxed">
                 Elder health monitoring involves deep vulnerability. We built CareDesk on the unshakeable premise that medical data must never be commercialized, scraped for ad networks, or exposed without explicit elder consent.
               </p>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-blue-50 dark:bg-blue-950/60 text-blue-600 shrink-0">
+                  <div className="p-2 rounded-xl bg-blue-100 text-blue-700 shrink-0">
                     <Lock className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                    <h4 className="text-xs font-bold text-slate-900">
                       Row-Level Security (RLS)
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5">
                       PostgreSQL policies restrict all reading queries solely to verified family members.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-teal-50 dark:bg-teal-950/60 text-teal-600 shrink-0">
+                  <div className="p-2 rounded-xl bg-teal-100 text-teal-700 shrink-0">
                     <EyeOff className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                    <h4 className="text-xs font-bold text-slate-900">
                       No Ad Network Tracking
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5">
                       Zero tracking pixels. Your parents&apos; blood pressure isn&apos;t commodified for medication ads.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-purple-50 dark:bg-purple-950/60 text-purple-600 shrink-0">
+                  <div className="p-2 rounded-xl bg-purple-100 text-purple-700 shrink-0">
                     <FileCheck2 className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                    <h4 className="text-xs font-bold text-slate-900">
                       Cryptographic Audit Trail
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5">
                       Inspect every timestamp when a vitals check-in or PDF analysis was conducted.
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <div className="p-2 rounded-xl bg-rose-50 dark:bg-rose-950/60 text-rose-600 shrink-0">
+                  <div className="p-2 rounded-xl bg-rose-100 text-rose-700 shrink-0">
                     <HeartHandshake className="w-4 h-4" />
                   </div>
                   <div>
-                    <h4 className="text-xs font-bold text-slate-900 dark:text-white">
+                    <h4 className="text-xs font-bold text-slate-900">
                       Elder Revocation Rights
                     </h4>
-                    <p className="text-[11px] text-slate-500 mt-0.5">
+                    <p className="text-[11px] text-slate-600 font-medium mt-0.5">
                       Elders maintain full authority to revoke or grant caregiver access at any time.
                     </p>
                   </div>

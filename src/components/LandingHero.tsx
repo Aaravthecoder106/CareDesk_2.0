@@ -36,36 +36,36 @@ export function LandingHero({ onOpenSignup }: LandingHeroProps) {
           {/* Left Column: Headline, Persona Toggle & CTAs (7 cols) */}
           <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
             {/* Pill Banner */}
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/15 backdrop-blur-xl border border-white/30 text-xs font-semibold text-white shadow-sm mx-auto lg:mx-0">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-950/50 backdrop-blur-xl border border-white/30 text-xs font-semibold text-white shadow-md mx-auto lg:mx-0">
               <span className="flex h-2 w-2 rounded-full bg-white animate-ping" />
               <span className="font-extrabold tracking-wide uppercase text-[11px] text-white">CareDesk 2.0</span>
               <span className="text-white/40">•</span>
-              <span className="text-blue-100">Remote Elder-Care Telemetry</span>
+              <span className="text-white font-medium">Remote Elder-Care Telemetry</span>
             </div>
 
-            {/* Editorial Title - Clean white geometric typography matching the Antigravity image */}
-            <h1 className="text-4xl sm:text-6xl lg:text-[72px] font-black tracking-tight text-white leading-[1.06] antigravity-text-glow font-sans">
-              Cared for like family.{' '}
-              <span className="block text-sky-200 font-extrabold">
+            {/* Editorial Title - Clean solid white geometric typography matching the Antigravity image */}
+            <h1 className="text-4xl sm:text-6xl lg:text-[76px] font-extrabold tracking-tight text-white leading-[1.04] drop-shadow-sm font-sans">
+              Cared for like family. <br />
+              <span className="text-white font-extrabold drop-shadow-sm">
                 Tracked like critical telemetry.
               </span>
             </h1>
 
-            {/* Empathetic Subheading */}
-            <p className="text-base sm:text-lg text-blue-100/95 leading-relaxed max-w-2xl mx-auto lg:mx-0 font-normal">
+            {/* Empathetic Subheading - Maximum contrast */}
+            <p className="text-base sm:text-lg text-white font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0 drop-shadow-xs">
               Living miles away shouldn&apos;t mean living in constant anxiety over your aging parents&apos; blood pressure and blood sugar. CareDesk gives you instant traffic-light clarity, deterministic vitals safety, and bilingual Hinglish report summaries.
             </p>
 
             {/* Dual Persona Switcher Segment */}
-            <div className="p-1.5 rounded-2xl bg-white/15 backdrop-blur-2xl border border-white/30 w-fit mx-auto lg:mx-0 shadow-lg">
+            <div className="p-1.5 rounded-2xl bg-blue-950/40 backdrop-blur-2xl border border-white/30 w-fit mx-auto lg:mx-0 shadow-lg">
               <div className="flex items-center gap-1.5">
                 <button
                   type="button"
                   onClick={() => setActivePersona('caregiver')}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition ${
                     activePersona === 'caregiver'
-                      ? 'bg-white text-blue-700 shadow-md font-extrabold'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'bg-white text-blue-800 shadow-md font-extrabold'
+                      : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <Users className="w-4 h-4" />
@@ -76,8 +76,8 @@ export function LandingHero({ onOpenSignup }: LandingHeroProps) {
                   onClick={() => setActivePersona('patient')}
                   className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-xs sm:text-sm font-bold transition ${
                     activePersona === 'patient'
-                      ? 'bg-teal-400 text-slate-950 shadow-md font-extrabold'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'bg-teal-300 text-slate-950 shadow-md font-extrabold'
+                      : 'text-white/90 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   <HeartPulse className="w-4 h-4" />
@@ -87,8 +87,8 @@ export function LandingHero({ onOpenSignup }: LandingHeroProps) {
             </div>
 
             {/* Persona Dynamic Micro-Description */}
-            <div className="text-xs text-blue-100/90 max-w-lg mx-auto lg:mx-0 flex items-center justify-center lg:justify-start gap-2">
-              <CheckCircle2 className="w-4 h-4 text-sky-300 shrink-0" />
+            <div className="text-xs text-white font-semibold max-w-lg mx-auto lg:mx-0 flex items-center justify-center lg:justify-start gap-2">
+              <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
               <span>
                 {activePersona === 'caregiver'
                   ? 'Optimized for sons, daughters, and remote doctors with automated alerts.'
@@ -100,7 +100,7 @@ export function LandingHero({ onOpenSignup }: LandingHeroProps) {
             <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3.5 pt-2">
               <button
                 onClick={() => onOpenSignup(activePersona)}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl antigravity-btn-white text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xl font-bold"
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl antigravity-btn-white text-sm sm:text-base flex items-center justify-center gap-2.5 shadow-xl font-extrabold"
               >
                 <span>Sign Up as {activePersona === 'caregiver' ? 'Family Caregiver' : 'Senior / Patient'}</span>
                 <ArrowRight className="w-4 h-4" />
@@ -116,9 +116,9 @@ export function LandingHero({ onOpenSignup }: LandingHeroProps) {
             </div>
 
             {/* Trust Markers */}
-            <div className="pt-6 border-t border-white/20 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-blue-100/90 font-medium">
+            <div className="pt-6 border-t border-white/20 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-xs text-white font-semibold">
               <div className="flex items-center gap-1.5">
-                <ShieldCheck className="w-4 h-4 text-sky-300" />
+                <ShieldCheck className="w-4 h-4 text-emerald-300" />
                 <span>Deterministic Validation</span>
               </div>
               <div className="flex items-center gap-1.5">

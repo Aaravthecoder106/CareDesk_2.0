@@ -22,7 +22,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 selection:bg-blue-600 selection:text-white relative">
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 selection:bg-blue-600 selection:text-white relative">
       {/* Liquid Glass Navigation */}
       <LandingNav onOpenSignup={handleOpenSignup} />
 
