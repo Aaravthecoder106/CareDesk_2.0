@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { UserRole } from '@/context/CareContext';
 import { LandingNav } from '@/components/LandingNav';
 import { LandingHero } from '@/components/LandingHero';
+import { ScrollytellingCorridor } from '@/components/ScrollytellingCorridor';
 import { PersonaComparison } from '@/components/PersonaComparison';
 import { LandingFeatures } from '@/components/LandingFeatures';
 import { LandingSecurity } from '@/components/LandingSecurity';
@@ -30,6 +31,9 @@ export default function HomePage() {
       <main className="flex-1 space-y-6">
         {/* Hero Section with Motion Graphics & Dual Persona Switcher */}
         <LandingHero onOpenSignup={handleOpenSignup} />
+
+        {/* Cinematic Terafab-Style Scrollytelling Telemetry Corridor */}
+        <ScrollytellingCorridor onOpenSignup={handleOpenSignup} />
 
         {/* Dual Roles Breakdown (Patient vs Caregiver) */}
         <PersonaComparison onSelectRole={handleOpenSignup} />
