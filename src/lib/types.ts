@@ -70,10 +70,21 @@ export interface AuditLogItem {
   id: string;
   elderId: string;
   actorName: string;
-  actionType: 'vitals_logged' | 'report_analyzed' | 'elder_updated' | 'alert_triggered' | 'user_registered' | 'consent_granted';
+  actionType: 'vitals_logged' | 'report_analyzed' | 'elder_updated' | 'alert_triggered' | 'user_registered' | 'consent_granted' | 'sos_dispatched' | 'medication_taken';
   description: string;
   timestamp: string;
   metadata?: Record<string, unknown>;
+}
+
+export interface ElderMedication {
+  id: string;
+  elderId: string;
+  name: string;
+  dosage: string;
+  timing: 'morning' | 'afternoon' | 'evening' | 'night';
+  instructions: string;
+  takenToday: boolean;
+  lastTakenAt?: string;
 }
 
 export interface VitalsParseResult {
@@ -94,3 +105,4 @@ export interface VitalsParseResult {
   overallStatus: StatusLevel;
   recommendations: string[];
 }
+

@@ -39,10 +39,6 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
 
           {/* Desktop Navigation Links */}
           <nav className="hidden md:flex items-center gap-7 text-sm font-bold text-slate-700">
-            <a href="#corridor" className="hover:text-blue-600 transition flex items-center gap-1.5 text-blue-700">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-              <span>Live Corridor</span>
-            </a>
             <a href="#roles" className="hover:text-blue-600 transition">
               Patient vs Caregiver
             </a>
@@ -72,12 +68,13 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
               </Link>
             ) : (
               <>
-                <button
-                  onClick={() => onOpenSignup('patient')}
-                  className="px-3.5 py-2 text-xs font-extrabold text-teal-800 hover:text-teal-950 transition"
+                <Link
+                  href="/elder"
+                  className="px-3.5 py-2 text-xs font-extrabold text-teal-800 hover:text-teal-950 transition flex items-center gap-1"
                 >
-                  Elder Portal
-                </button>
+                  <Heart className="w-3.5 h-3.5 fill-teal-700" />
+                  <span>Elder Portal</span>
+                </Link>
                 <button
                   onClick={() => onOpenSignup('caregiver')}
                   className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-extrabold shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition hover:scale-102"

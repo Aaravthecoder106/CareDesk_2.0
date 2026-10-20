@@ -33,6 +33,7 @@ export function Navbar({ onOpenCheckIn }: NavbarProps) {
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     { label: 'Daily Vitals', href: '/vitals', icon: Activity },
     { label: 'AI Report Analyzer', href: '/reports', icon: Sparkles },
+    { label: 'Senior Portal', href: '/elder', icon: Heart },
     { label: 'Audit Trail', href: '/audit', icon: History },
   ];
 

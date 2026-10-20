@@ -1,8 +1,8 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { AuditLogItem, Elder, MedicalReport, VitalReading, VitalsParseResult } from '@/lib/types';
-import { INITIAL_AUDIT_LOGS, INITIAL_ELDERS, INITIAL_REPORTS, INITIAL_VITALS } from '@/lib/mockData';
+import { AuditLogItem, Elder, ElderMedication, MedicalReport, VitalReading, VitalsParseResult } from '@/lib/types';
+import { INITIAL_AUDIT_LOGS, INITIAL_ELDERS, INITIAL_MEDICATIONS, INITIAL_REPORTS, INITIAL_VITALS } from '@/lib/mockData';
 import { parseAndEvaluateVitals, VitalsInputRaw } from '@/lib/vitalsEngine';
 import { isLiveSupabaseConfigured } from '@/lib/supabase/client';
 
@@ -25,12 +25,19 @@ interface CareContextType {
   activeElderId: string;
   activeElder: Elder;
   setActiveElderId: (id: string) => void;
+  addElder: (elder: Omit<Elder, 'id' | 'currentStatus'>) => Elder;
+  updateElder: (id: string, updates: Partial<Elder>) => void;
   vitals: VitalReading[];
   activeElderVitals: VitalReading[];
   reports: MedicalReport[];
   activeElderReports: MedicalReport[];
   auditLogs: AuditLogItem[];
   activeElderAuditLogs: AuditLogItem[];
+  medications: ElderMedication[];
+  activeElderMedications: ElderMedication[];
+  toggleMedication: (id: string) => void;
+  addMedication: (med: Omit<ElderMedication, 'id' | 'takenToday'>) => void;
+  triggerEmergencySOS: (elderId: string, reason?: string) => { success: boolean; message: string; timestamp: string };
   addVitalReading: (raw: VitalsInputRaw, recordedByName?: string) => { success: boolean; result?: VitalsParseResult; error?: string };
   addReport: (report: MedicalReport) => void;
   currentUser: UserProfile | null;
@@ -49,6 +56,7 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
   const [vitals, setVitals] = useState<VitalReading[]>(INITIAL_VITALS);
   const [reports, setReports] = useState<MedicalReport[]>(INITIAL_REPORTS);
   const [auditLogs, setAuditLogs] = useState<AuditLogItem[]>(INITIAL_AUDIT_LOGS);
+  const [medications, setMedications] = useState<ElderMedication[]>(INITIAL_MEDICATIONS);
   const [currentUser, setCurrentUser] = useState<UserProfile | null>(null);
   const [isLiveMode, setIsLiveMode] = useState<boolean>(false);
 
@@ -60,6 +68,7 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
       const storedVitals = localStorage.getItem('caredesk_vitals');
       const storedReports = localStorage.getItem('caredesk_reports');
       const storedLogs = localStorage.getItem('caredesk_audit');
+      const storedMeds = localStorage.getItem('caredesk_medications');
       const storedActive = localStorage.getItem('caredesk_active_elder');
       const storedUser = localStorage.getItem('caredesk_user');
 
@@ -67,6 +76,7 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
       if (storedVitals) setVitals(JSON.parse(storedVitals));
       if (storedReports) setReports(JSON.parse(storedReports));
       if (storedLogs) setAuditLogs(JSON.parse(storedLogs));
+      if (storedMeds) setMedications(JSON.parse(storedMeds));
       if (storedActive) setActiveElderId(storedActive);
       if (storedUser) setCurrentUser(JSON.parse(storedUser));
     } catch (e) {
@@ -84,11 +94,12 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
       localStorage.setItem('caredesk_vitals', JSON.stringify(vitals));
       localStorage.setItem('caredesk_reports', JSON.stringify(reports));
       localStorage.setItem('caredesk_audit', JSON.stringify(auditLogs));
+      localStorage.setItem('caredesk_medications', JSON.stringify(medications));
       localStorage.setItem('caredesk_active_elder', activeElderId);
     } catch (e) {
       console.error('Failed to sync to localStorage', e);
     }
-  }, [elders, vitals, reports, auditLogs, activeElderId, isLoaded]);
+  }, [elders, vitals, reports, auditLogs, medications, activeElderId, isLoaded]);
 
   const activeElder = elders.find((e) => e.id === activeElderId) || elders[0];
   const activeElderVitals = vitals
@@ -100,6 +111,127 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
   const activeElderAuditLogs = auditLogs
     .filter((l) => l.elderId === activeElderId)
     .sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+  const activeElderMedications = medications.filter((m) => m.elderId === activeElderId);
+
+  const toggleMedication = (id: string) => {
+    setMedications((prev) =>
+      prev.map((med) => {
+        if (med.id === id) {
+          const newStatus = !med.takenToday;
+          const updated = {
+            ...med,
+            takenToday: newStatus,
+            lastTakenAt: newStatus ? new Date().toISOString() : med.lastTakenAt,
+          };
+
+          // Add audit log
+          const newLog: AuditLogItem = {
+            id: `a-${Date.now()}`,
+            elderId: med.elderId,
+            actorName: currentUser?.name || 'Elder / Caregiver',
+            actionType: 'medication_taken',
+            description: newStatus
+              ? `Marked medication "${med.name} (${med.dosage})" as TAKEN today.`
+              : `Unmarked medication "${med.name}" as pending.`,
+            timestamp: new Date().toISOString(),
+            metadata: { medicationId: med.id, status: newStatus },
+          };
+          setAuditLogs((l) => [newLog, ...l]);
+
+          return updated;
+        }
+        return med;
+      })
+    );
+  };
+
+  const addMedication = (med: Omit<ElderMedication, 'id' | 'takenToday'>) => {
+    const newMed: ElderMedication = {
+      ...med,
+      id: `m-${Date.now()}`,
+      takenToday: false,
+    };
+    setMedications((prev) => [...prev, newMed]);
+
+    const newLog: AuditLogItem = {
+      id: `a-${Date.now()}`,
+      elderId: med.elderId,
+      actorName: currentUser?.name || 'Family Caregiver',
+      actionType: 'elder_updated',
+      description: `Added new prescription routine: "${med.name} (${med.dosage}) - ${med.timing}".`,
+      timestamp: new Date().toISOString(),
+      metadata: { medicationId: newMed.id },
+    };
+    setAuditLogs((l) => [newLog, ...l]);
+  };
+
+  const addElder = (elderData: Omit<Elder, 'id' | 'currentStatus'>): Elder => {
+    const newElder: Elder = {
+      ...elderData,
+      id: `elder-${Date.now()}`,
+      currentStatus: 'green',
+    };
+    setElders((prev) => [...prev, newElder]);
+    setActiveElderId(newElder.id);
+
+    const newLog: AuditLogItem = {
+      id: `a-${Date.now()}`,
+      elderId: newElder.id,
+      actorName: currentUser?.name || 'Caregiver',
+      actionType: 'consent_granted',
+      description: `Added new elder profile: ${newElder.fullName} (${newElder.age} yrs). Baseline status set to Green.`,
+      timestamp: new Date().toISOString(),
+      metadata: { elderId: newElder.id },
+    };
+    setAuditLogs((l) => [newLog, ...l]);
+    return newElder;
+  };
+
+  const updateElder = (id: string, updates: Partial<Elder>) => {
+    setElders((prev) =>
+      prev.map((e) => (e.id === id ? { ...e, ...updates } : e))
+    );
+
+    const target = elders.find((e) => e.id === id);
+    const newLog: AuditLogItem = {
+      id: `a-${Date.now()}`,
+      elderId: id,
+      actorName: currentUser?.name || 'Caregiver',
+      actionType: 'elder_updated',
+      description: `Updated profile details and emergency preferences for ${target?.fullName || 'Elder'}.`,
+      timestamp: new Date().toISOString(),
+      metadata: updates,
+    };
+    setAuditLogs((l) => [newLog, ...l]);
+  };
+
+  const triggerEmergencySOS = (elderId: string, reason = 'Senior pressed 1-tap SOS distress button'): { success: boolean; message: string; timestamp: string } => {
+    const target = elders.find((e) => e.id === elderId) || activeElder;
+    const now = new Date().toISOString();
+
+    // Mark elder status as Red
+    setElders((prev) =>
+      prev.map((e) => (e.id === target.id ? { ...e, currentStatus: 'red' } : e))
+    );
+
+    // Record high priority SOS audit log
+    const sosLog: AuditLogItem = {
+      id: `a-${Date.now()}`,
+      elderId: target.id,
+      actorName: `${target.fullName} (SOS Alert)`,
+      actionType: 'sos_dispatched',
+      description: `EMERGENCY SOS DISPATCHED: ${reason}. Automated SMS sent to ${target.emergencyContactName} (${target.emergencyContactPhone}). Primary Doctor ${target.primaryDoctorName} notified.`,
+      timestamp: now,
+      metadata: { priority: 'CRITICAL_P0', emergencyContact: target.emergencyContactPhone },
+    };
+    setAuditLogs((prev) => [sosLog, ...prev]);
+
+    return {
+      success: true,
+      message: `Emergency SOS dispatched for ${target.fullName}. Contact ${target.emergencyContactName} and Doctor ${target.primaryDoctorName} notified immediately.`,
+      timestamp: now,
+    };
+  };
 
   const addVitalReading = (raw: VitalsInputRaw, recordedByName = 'Aarav (Caregiver)') => {
     const evalResult = parseAndEvaluateVitals(raw);
@@ -209,13 +341,13 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
     localStorage.removeItem('caredesk_vitals');
     localStorage.removeItem('caredesk_reports');
     localStorage.removeItem('caredesk_audit');
-    localStorage.removeItem('caredesk_active_elder');
-    localStorage.removeItem('caredesk_user');
+    localStorage.removeItem('caredesk_medications');
     setElders(INITIAL_ELDERS);
     setActiveElderId(INITIAL_ELDERS[0].id);
     setVitals(INITIAL_VITALS);
     setReports(INITIAL_REPORTS);
     setAuditLogs(INITIAL_AUDIT_LOGS);
+    setMedications(INITIAL_MEDICATIONS);
     setCurrentUser(null);
   };
 
@@ -226,12 +358,19 @@ export function CareProvider({ children }: { children: React.ReactNode }) {
         activeElderId,
         activeElder,
         setActiveElderId,
+        addElder,
+        updateElder,
         vitals,
         activeElderVitals,
         reports,
         activeElderReports,
         auditLogs,
         activeElderAuditLogs,
+        medications,
+        activeElderMedications,
+        toggleMedication,
+        addMedication,
+        triggerEmergencySOS,
         addVitalReading,
         addReport,
         currentUser,

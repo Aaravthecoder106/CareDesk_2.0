@@ -265,3 +265,63 @@ export const INITIAL_AUDIT_LOGS: AuditLogItem[] = [
     timestamp: daysAgo(0, '09:00:10'),
   },
 ];
+
+export const INITIAL_MEDICATIONS = [
+  {
+    id: 'm-1',
+    elderId: 'elder-1',
+    name: 'Telmisartan (Blood Pressure)',
+    dosage: '40 mg',
+    timing: 'morning' as const,
+    instructions: 'Take with warm water after breakfast',
+    takenToday: true,
+    lastTakenAt: daysAgo(0, '08:45:00'),
+  },
+  {
+    id: 'm-2',
+    elderId: 'elder-1',
+    name: 'Metformin (Blood Sugar)',
+    dosage: '500 mg',
+    timing: 'afternoon' as const,
+    instructions: 'Take midway during lunch with curd/dal',
+    takenToday: false,
+  },
+  {
+    id: 'm-3',
+    elderId: 'elder-1',
+    name: 'Hydration & 20-min Gentle Walk',
+    dosage: '1 glass water + walk',
+    timing: 'evening' as const,
+    instructions: 'Drink water before starting; take walking stick',
+    takenToday: false,
+  },
+  {
+    id: 'm-4',
+    elderId: 'elder-1',
+    name: 'Atorvastatin (Cholesterol)',
+    dosage: '10 mg',
+    timing: 'night' as const,
+    instructions: 'Take 30 minutes before bedtime',
+    takenToday: false,
+  },
+  {
+    id: 'm-5',
+    elderId: 'elder-2',
+    name: 'Calcium Carbonate + Vitamin D3',
+    dosage: '500 mg / 250 IU',
+    timing: 'morning' as const,
+    instructions: 'Take with breakfast',
+    takenToday: true,
+    lastTakenAt: daysAgo(0, '09:15:00'),
+  },
+  {
+    id: 'm-6',
+    elderId: 'elder-2',
+    name: 'Ferrous Ascorbate (Iron)',
+    dosage: '100 mg',
+    timing: 'afternoon' as const,
+    instructions: 'Take with lemon water or amla juice for better absorption',
+    takenToday: false,
+  },
+];
+
