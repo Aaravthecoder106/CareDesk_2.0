@@ -8,14 +8,16 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-outfit), var(--font-sans), system-ui, -apple-system, sans-serif;
+  --font-display: var(--font-outfit), system-ui, -apple-system, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+  font-family: var(--font-outfit), var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  letter-spacing: -0.015em;
 }
 
 /* Custom Scrollbars */
@@ -35,44 +37,146 @@ body {
 }
 
 /* ========================================================
-   LIQUID GLASS & MOTION GRAPHICS SYSTEM
+   ANTIGRAVITY GRADIENT & ATMOSPHERIC MESH SYSTEM
    ======================================================== */
 
-/* Liquid Glass Cards */
+/* The Exact Signature Antigravity Sky/Cobalt/Lilac Gradient */
+.antigravity-gradient {
+  background: 
+    radial-gradient(75% 65% at 6% 10%, rgba(255, 255, 255, 0.96) 0%, rgba(243, 232, 255, 0.85) 20%, rgba(191, 219, 254, 0.5) 45%, transparent 75%),
+    radial-gradient(70% 60% at 94% 88%, rgba(224, 242, 254, 0.88) 0%, rgba(147, 197, 253, 0.45) 45%, transparent 70%),
+    radial-gradient(circle at 85% 15%, #1e69ff 0%, #1d4ed8 45%, transparent 72%),
+    radial-gradient(circle at 50% 50%, #2563eb 0%, #1e40af 60%, #172554 100%),
+    #1d4ed8;
+  background-size: 130% 130%;
+}
+
+@keyframes antigravity-flow {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+.antigravity-flow-animated {
+  background: 
+    radial-gradient(75% 65% at 6% 10%, rgba(255, 255, 255, 0.96) 0%, rgba(243, 232, 255, 0.85) 22%, rgba(191, 219, 254, 0.5) 48%, transparent 75%),
+    radial-gradient(70% 60% at 94% 88%, rgba(224, 242, 254, 0.88) 0%, rgba(147, 197, 253, 0.45) 45%, transparent 70%),
+    radial-gradient(circle at 85% 15%, #1e69ff 0%, #1d4ed8 45%, transparent 72%),
+    radial-gradient(circle at 50% 50%, #2563eb 0%, #1e40af 60%, #172554 100%),
+    #1d4ed8;
+  background-size: 140% 140%;
+  animation: antigravity-flow 24s ease-in-out infinite alternate;
+}
+
+/* Subtle atmospheric mesh backdrop for light mode pages */
+.antigravity-mesh-subtle {
+  background: 
+    radial-gradient(circle at 10% 10%, rgba(238, 242, 255, 0.9) 0%, transparent 45%),
+    radial-gradient(circle at 90% 20%, rgba(219, 234, 254, 0.8) 0%, transparent 45%),
+    radial-gradient(circle at 50% 85%, rgba(224, 242, 254, 0.7) 0%, transparent 50%),
+    #f8fafc;
+}
+
+/* Antigravity Crisp White Text Glow */
+.antigravity-text-glow {
+  text-shadow: 0 2px 24px rgba(255, 255, 255, 0.4), 0 0 40px rgba(191, 219, 254, 0.3);
+}
+
+/* Antigravity Translucent Glass (Float over blue gradient) */
+.antigravity-glass {
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(28px) saturate(200%);
+  -webkit-backdrop-filter: blur(28px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 30px 60px -15px rgba(15, 23, 42, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+}
+
+.antigravity-glass:hover {
+  background: rgba(255, 255, 255, 0.22);
+  border-color: rgba(255, 255, 255, 0.55);
+}
+
+/* Pure White Antigravity Action Button */
+.antigravity-btn-white {
+  position: relative;
+  background: #ffffff;
+  color: #1d4ed8;
+  font-weight: 700;
+  box-shadow: 
+    0 12px 30px -5px rgba(15, 23, 42, 0.2),
+    0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.antigravity-btn-white:hover {
+  transform: translateY(-2px) scale(1.01);
+  background: #f8fafc;
+  box-shadow: 
+    0 18px 36px -6px rgba(15, 23, 42, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 1) inset;
+  color: #1e40af;
+}
+
+/* Antigravity Translucent Button */
+.antigravity-btn-glass {
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  color: #ffffff;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+  transition: all 0.25s ease;
+}
+.antigravity-btn-glass:hover {
+  background: rgba(255, 255, 255, 0.28);
+  border-color: rgba(255, 255, 255, 0.6);
+  transform: translateY(-1px);
+}
+
+/* ========================================================
+   LIQUID GLASS CARDS FOR ALL SECTIONS
+   ======================================================== */
+
 .liquid-glass {
-  background: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.82);
   backdrop-filter: blur(24px) saturate(190%);
   -webkit-backdrop-filter: blur(24px) saturate(190%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow: 
-    0 20px 40px -15px rgba(15, 23, 42, 0.06),
-    0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-    0 1px 2px 0 rgba(0, 0, 0, 0.04);
+    0 20px 45px -15px rgba(30, 58, 138, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset,
+    0 1px 3px 0 rgba(0, 0, 0, 0.03);
 }
 
 .dark .liquid-glass {
-  background: rgba(15, 23, 42, 0.72);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(15, 23, 42, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.14);
   box-shadow: 
     0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset;
 }
 
-/* Deeper refractive liquid glass card with iridescent rim */
 .liquid-glass-card {
   position: relative;
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.55) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(255, 255, 255, 0.72) 100%);
   backdrop-filter: blur(28px) saturate(200%);
   -webkit-backdrop-filter: blur(28px) saturate(200%);
-  border: 1px solid rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.95);
   box-shadow: 
-    0 25px 50px -12px rgba(30, 41, 59, 0.08),
-    0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+    0 25px 50px -12px rgba(30, 58, 138, 0.08),
+    0 0 0 1px rgba(255, 255, 255, 0.8) inset;
   transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .dark .liquid-glass-card {
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.85) 0%, rgba(15, 23, 42, 0.65) 100%);
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.88) 0%, rgba(15, 23, 42, 0.72) 100%);
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 
     0 30px 60px -15px rgba(0, 0, 0, 0.6),
@@ -82,104 +186,8 @@ body {
 .liquid-glass-card:hover {
   transform: translateY(-4px);
   box-shadow: 
-    0 35px 70px -15px rgba(37, 99, 235, 0.12),
-    0 0 0 1.5px rgba(96, 165, 250, 0.45) inset;
-}
-
-/* Liquid Button with specular reflection */
-.liquid-button-primary {
-  position: relative;
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 50%, #4338ca 100%);
-  box-shadow: 
-    0 10px 25px -5px rgba(37, 99, 235, 0.4),
-    0 0 0 1px rgba(255, 255, 255, 0.25) inset;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.liquid-button-primary:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 
-    0 16px 35px -5px rgba(37, 99, 235, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.4) inset;
-}
-
-.liquid-button-patient {
-  position: relative;
-  background: linear-gradient(135deg, #059669 0%, #0d9488 50%, #0284c7 100%);
-  box-shadow: 
-    0 10px 25px -5px rgba(13, 148, 136, 0.35),
-    0 0 0 1px rgba(255, 255, 255, 0.3) inset;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.liquid-button-patient:hover {
-  transform: translateY(-2px) scale(1.01);
-  box-shadow: 
-    0 16px 35px -5px rgba(13, 148, 136, 0.45),
-    0 0 0 1px rgba(255, 255, 255, 0.45) inset;
-}
-
-.liquid-button-secondary {
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(226, 232, 240, 0.9);
-  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-  transition: all 0.25s ease;
-}
-.liquid-button-secondary:hover {
-  background: rgba(255, 255, 255, 0.95);
-  border-color: rgba(148, 163, 184, 0.6);
-  transform: translateY(-1px);
-}
-
-/* Ambient Radial Mesh Gradients */
-.ambient-glow-teal {
-  position: absolute;
-  width: 480px;
-  height: 480px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(20, 184, 166, 0.25) 0%, rgba(56, 189, 248, 0.15) 50%, transparent 70%);
-  filter: blur(60px);
-  pointer-events: none;
-  animation: float-slow 18s ease-in-out infinite alternate;
-}
-
-.ambient-glow-rose {
-  position: absolute;
-  width: 450px;
-  height: 450px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(244, 63, 94, 0.22) 0%, rgba(236, 72, 153, 0.12) 50%, transparent 70%);
-  filter: blur(65px);
-  pointer-events: none;
-  animation: float-slow 14s ease-in-out 4s infinite alternate-reverse;
-}
-
-.ambient-glow-indigo {
-  position: absolute;
-  width: 550px;
-  height: 550px;
-  border-radius: 9999px;
-  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.12) 50%, transparent 70%);
-  filter: blur(70px);
-  pointer-events: none;
-  animation: float-slow 22s ease-in-out 2s infinite alternate;
-}
-
-/* Organic Morphing Liquid Blob */
-@keyframes liquid-blob {
-  0% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-  50% {
-    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-  }
-  100% {
-    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-  }
-}
-
-.liquid-blob-shape {
-  animation: liquid-blob 12s ease-in-out infinite;
+    0 35px 70px -15px rgba(37, 99, 235, 0.16),
+    0 0 0 1.5px rgba(96, 165, 250, 0.5) inset;
 }
 
 /* Floating animation */
@@ -188,7 +196,7 @@ body {
     transform: translateY(0px) rotate(0deg);
   }
   50% {
-    transform: translateY(-18px) rotate(3deg);
+    transform: translateY(-16px) rotate(2deg);
   }
   100% {
     transform: translateY(0px) rotate(0deg);
@@ -212,35 +220,6 @@ body {
 .animate-ecg {
   stroke-dasharray: 1000;
   animation: ecg-sweep 4s linear infinite;
-}
-
-/* Specular Iridescent Shimmer */
-@keyframes iridescent-shine {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-.iridescent-text {
-  background: linear-gradient(90deg, #1e3a8a, #0284c7, #0d9488, #2563eb, #1e3a8a);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: iridescent-shine 8s ease infinite;
-}
-
-.dark .iridescent-text {
-  background: linear-gradient(90deg, #60a5fa, #38bdf8, #2dd4bf, #818cf8, #60a5fa);
-  background-size: 300% 300%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: iridescent-shine 8s ease infinite;
 }
 
 /* Print styling */

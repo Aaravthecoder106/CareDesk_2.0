@@ -76,7 +76,7 @@ export function LandingNav({ onOpenSignup }: LandingNavProps) {
                 </button>
                 <button
                   onClick={() => onOpenSignup('caregiver')}
-                  className="px-5 py-2.5 rounded-xl liquid-button-primary text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-600/20 flex items-center gap-1.5"
+                  className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-xs sm:text-sm font-bold shadow-md shadow-blue-500/25 flex items-center gap-1.5 transition hover:scale-102"
                 >
                   <span>Sign Up Free</span>
                   <ArrowRight className="w-3.5 h-3.5" />
